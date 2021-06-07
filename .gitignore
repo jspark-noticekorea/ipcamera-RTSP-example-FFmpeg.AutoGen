@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+!rtsp_test/FFmpeg/bin/x64/*.gitkeep
