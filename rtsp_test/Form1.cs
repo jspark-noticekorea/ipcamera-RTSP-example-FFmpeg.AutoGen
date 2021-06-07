@@ -46,12 +46,23 @@ namespace rtsp_test
 
         private unsafe void ProcessThread()
         {
-            FFmpegBinariesHelper.RegisterFFmpegBinaries();
-
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             string url = tbUrl.Text;
+            sw.Start();
+            FFmpegBinariesHelper.RegisterFFmpegBinaries();
+            sw.Stop();
+            Console.WriteLine("1: " + sw.ElapsedMilliseconds.ToString());
+            sw.Reset();
+
+            sw.Start();
 
             using (VideoStreamDecoder decoder = new VideoStreamDecoder(url))
             {
+                sw.Stop();
+                Console.WriteLine("2: " + sw.ElapsedMilliseconds.ToString());
+                sw.Reset();
+
+                sw.Start();
                 IReadOnlyDictionary<string, string> contextInfoDictionary = decoder.GetContextInfo();
 
                 contextInfoDictionary.ToList().ForEach(x => Console.WriteLine($"{x.Key} = {x.Value}"));
@@ -63,6 +74,9 @@ namespace rtsp_test
 
                 using (VideoFrameConverter converter = new VideoFrameConverter(sourceSize, sourcePixelFormat, targetSize, targetPixelFormat))
                 {
+                    sw.Stop();
+                    Console.WriteLine("3: " + sw.ElapsedMilliseconds.ToString());
+                    sw.Reset();
                     int frameNumber = 0;
 
                     while (decoder.TryDecodeNextFrame(out AVFrame sourceFrame) && isThreadRunning)

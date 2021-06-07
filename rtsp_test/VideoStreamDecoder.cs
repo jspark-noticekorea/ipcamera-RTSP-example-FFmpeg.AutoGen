@@ -20,6 +20,8 @@ namespace FFmpeg.AutoGen
             _receivedFrame = ffmpeg.av_frame_alloc();
             var pFormatContext = _pFormatContext;
             ffmpeg.avformat_open_input(&pFormatContext, url, null, null).ThrowExceptionIfError();
+            pFormatContext->probesize = 4096;
+            //pFormatContext->flags |= 0x0040; // NOBUFFER
             ffmpeg.avformat_find_stream_info(_pFormatContext, null).ThrowExceptionIfError();
             AVCodec* codec = null;
             _streamIndex = ffmpeg
