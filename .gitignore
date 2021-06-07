@@ -115,3 +115,4 @@ UpgradeLog*.XML
 /rtsp_test/FFmpeg/bin/x64/swscale-5.dll
 /rtsp_test/FFmpeg/bin/x64/swresample-3.dll
 /rtsp_test/FFmpeg/bin/x64/postproc-55.dll
+/ip.txt
