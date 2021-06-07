@@ -14,15 +14,9 @@ This is a sample code for streaming ip-camera image with [FFmpeg.AutoGen](https:
 # Fast open stream
 
 2021.06.07
-
 I'm developing this test project to stream real-time image(video) with ffmpeg.
-
 Opening streaming device functions had required about 6~8seconds (too slow!).
-
 I found a nice tip to open device quicly.
-
 I refered [this](https://www.programmersought.com/article/430134736/).
-
 There are several tips to reduce delay during `avformat_find_stream_info(_pFormatContext, null)`.
-
 I only tried the first one, but the effect was great!
